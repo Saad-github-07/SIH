@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { PATIENT_INFO, WEEKLY_COGNITIVE_TRENDS, CAREGIVER_RISK_ALERTS } from '../../data/sampleAnalytics';
+import { TouchBiometricsMonitor } from './TouchBiometricsMonitor';
+import { A2AAgentNetworkExplorer } from '../a2a/A2AAgentNetworkExplorer';
+import { A2ALiveCoPilot } from '../a2a/A2ALiveCoPilot';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, AreaChart, Area
 } from 'recharts';
 import {
   ShieldAlert, Activity, AlertTriangle, FileText, CheckCircle2,
-  Calendar, MapPin, User, Stethoscope, Download, Clock, Plus
+  Calendar, MapPin, User, Stethoscope, Download, Clock, Plus, Network, Cpu
 } from 'lucide-react';
 
 export const CaregiverDashboard = () => {
   const { t, cognitiveTrends, patientInfo, speakText } = useApp();
   const [alerts, setAlerts] = useState(CAREGIVER_RISK_ALERTS);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showA2AModal, setShowA2AModal] = useState(false);
 
   const printClinicalReport = () => {
     window.print();
@@ -34,14 +38,38 @@ export const CaregiverDashboard = () => {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => {
+                setShowA2AModal(true);
+                speakText("Opening Google A2A Agent Protocol Hub");
+              }}
+              style={{
+                background: 'linear-gradient(135deg, #0077b6, #023e8a)',
+                color: 'white',
+                border: 'none',
+                padding: '10px 18px',
+                borderRadius: '14px',
+                fontSize: '14px',
+                fontWeight: '700',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(0, 119, 182, 0.25)'
+              }}
+            >
+              <Network size={18} />
+              <span>Google A2A Hub</span>
+            </button>
+
             <button
               className="btn-primary"
               onClick={() => {
                 setShowReportModal(true);
                 speakText("Opening Medical Clinical Report");
               }}
-              style={{ fontSize: '15px', padding: '10px 18px' }}
+              style={{ fontSize: '14px', padding: '10px 18px' }}
             >
               <FileText size={18} />
               {t.downloadReport}
@@ -118,6 +146,9 @@ export const CaregiverDashboard = () => {
         </div>
       </div>
 
+      {/* Google A2A Active Multi-Agent Co-Pilot Widget */}
+      <A2ALiveCoPilot />
+
       {/* Analytics Charts Section */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '24px', marginBottom: '32px' }}>
         {/* 1. Cognitive Performance Chart */}
@@ -167,8 +198,11 @@ export const CaregiverDashboard = () => {
         </div>
       </div>
 
-      {/* Automated Dementia Risk Alerts */}
-      <div className="glass-card">
+      {/* 3. AI Touch Dynamics & Motor Biometrics Monitor */}
+      <TouchBiometricsMonitor />
+
+      {/* 4. Automated Dementia Risk Alerts */}
+      <div className="glass-card" style={{ marginTop: '28px' }}>
         <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <AlertTriangle size={22} style={{ color: '#d90429' }} />
           {t.riskAlertsTitle}
@@ -246,10 +280,10 @@ export const CaregiverDashboard = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <h2 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary-emerald)' }}>
-                    Cakes Clinical Assessment Report
+                    SmritiNER Neurological & Cognitive Biometrics Report
                   </h2>
                   <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-                    Cognitive & Behavioral Monitoring Summary for Neurological Consultation
+                    Continuous AI Touch Dynamics & Behavioral Monitoring for Neurological Consultation
                   </p>
                 </div>
                 <span style={{ fontSize: '12px', fontWeight: '700', background: '#e2e8f0', padding: '4px 10px', borderRadius: '8px' }}>
@@ -269,13 +303,18 @@ export const CaregiverDashboard = () => {
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '12px', marginBottom: '24px', fontSize: '14px' }}>
               <h4 style={{ fontWeight: '700', color: 'var(--primary-emerald)', marginBottom: '8px' }}>
-                🧠 AI Cognitive & Behavioral Summary
+                🧠 AI Cognitive & Motor Biometrics Clinical Summary
               </h4>
               <ul style={{ paddingLeft: '20px', lineHeight: '1.8' }}>
                 <li><strong>MMSE Equivalent Score:</strong> 24 / 30 (Mild Cognitive Impairment Stage)</li>
+                <li><strong>ICD-10 Diagnostic Code:</strong> G30.9 (Alzheimer's Early-Onset) / R25.1 (Tremor Motor Marker)</li>
+                <li><strong>CPT Telehealth Telemetry:</strong> Code 99453 / 99454 (Remote Continuous Physiological Monitoring)</li>
+                <li><strong>Motor Stability Score:</strong> 92 / 100 (Optimal Hand Steadiness, Low Micro-Tremor)</li>
+                <li><strong>Touch Hold (Dwell) Time:</strong> 185 ms (Within Normal Neurological Latency Range)</li>
+                <li><strong>Tap Precision Accuracy:</strong> 94% Center Hit Rate (±6.4px Average Dispersion)</li>
                 <li><strong>7-Day Score Trajectory:</strong> +4% improvement in spatial item recall</li>
                 <li><strong>Avg Reaction Speed:</strong> 3.4 seconds (Optimal range for age 74)</li>
-                <li><strong>Medication Compliance Rate:</strong> 94% (1 missed dosage logged)</li>
+                <li><strong>Medication Compliance Rate:</strong> 94% (Logged via SmritiNER Schedule)</li>
                 <li><strong>Hydration Rate:</strong> 7.3 / 8 glasses daily average</li>
               </ul>
             </div>
@@ -291,6 +330,11 @@ export const CaregiverDashboard = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Google A2A Agent Network Explorer Modal */}
+      {showA2AModal && (
+        <A2AAgentNetworkExplorer onClose={() => setShowA2AModal(false)} />
       )}
     </div>
   );

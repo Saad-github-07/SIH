@@ -34,7 +34,7 @@ export default function App() {
           color: 'var(--text-muted)'
         }}>
           <div>
-            <strong>Cakes</strong> • AI Cognitive Therapy & Memory Assistance Platform for North East India (Assam, Manipur, Meghalaya, Mizoram, Nagaland, Arunachal, Tripura, Sikkim)
+            <strong>SmritiNER</strong> • AI Cognitive Therapy & Memory Assistance Platform for North East India (Assam, Manipur, Meghalaya, Mizoram, Nagaland, Arunachal Pradesh, Tripura, Sikkim)
           </div>
         </footer>
       </div>

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/google/A2A/main/specification/agent-card-schema.json",
+  "name": "SmritiNER Cognitive Health & Neurological Telehealth Multi-Agent System",
+  "description": "Official Google A2A (Agent-to-Agent) protocol compliant ecosystem providing culturally-tailored dementia care, motor biometrics telemetry, cognitive therapy, and emergency coordination for the North Eastern Region of India.",
+  "url": "http://localhost:5173",
+  "version": "1.0.0",
+  "protocolVersion": "0.2.0",
+  "endpoints": {
+    "tasks": "http://localhost:5173/api/a2a/tasks",
+    "agentCard": "http://localhost:5173/.well-known/agent.json",
+    "sse": "http://localhost:5173/api/a2a/events"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": true,
+    "stateTransitionHistory": true,
+    "multiAgentOrchestration": true,
+    "offlineSyncHandshake": true
+  },
+  "defaultInputModes": ["text", "voice", "touch_telemetry", "json_rpc"],
+  "defaultOutputModes": ["text", "voice", "ui_action", "clinical_report"]
+}
