@@ -4,7 +4,10 @@ import { GameSelector } from './GameSelector';
 import { DailyRemindersCard } from './DailyRemindersCard';
 import { ReminiscenceWall } from './ReminiscenceWall';
 import { BazaarRewardsModal } from './BazaarRewardsModal';
+import { ReminiscenceChatModal } from './ReminiscenceChatModal';
+import { WebcamVisionOverlay } from '../vision/WebcamVisionOverlay';
 import { A2ALiveCoPilot } from '../a2a/A2ALiveCoPilot';
+import { StoryRecallGame } from '../games/StoryRecallGame';
 import { MemoryPalaceGame } from '../games/MemoryPalaceGame';
 import { PatternMatcherGame } from '../games/PatternMatcherGame';
 import { RoutineSequencerGame } from '../games/RoutineSequencerGame';
@@ -13,7 +16,7 @@ import { CulturalWordRiddleGame } from '../games/CulturalWordRiddleGame';
 import { FloralGardenTapGame } from '../games/FloralGardenTapGame';
 import { BazaarCoinCounterGame } from '../games/BazaarCoinCounterGame';
 import { VoiceAssistant } from '../common/VoiceAssistant';
-import { Cpu, Award, Heart, Sparkles, Sun, Star, Flame, Trophy, Coins, ShoppingBag } from 'lucide-react';
+import { Cpu, Award, Heart, Sparkles, Sun, Star, Flame, Trophy, Coins, ShoppingBag, MessageSquareHeart } from 'lucide-react';
 
 export const PatientDashboard = () => {
   const {
@@ -31,8 +34,12 @@ export const PatientDashboard = () => {
   } = useApp();
 
   const [showBazaarModal, setShowBazaarModal] = useState(false);
+  const [showReminiscenceChat, setShowReminiscenceChat] = useState(false);
 
   // If a game is active, render the specific game view
+  if (activeGame === 'story') {
+    return <StoryRecallGame onBack={() => setActiveGame(null)} />;
+  }
   if (activeGame === 'memory') {
     return <MemoryPalaceGame onBack={() => setActiveGame(null)} />;
   }
@@ -85,7 +92,7 @@ export const PatientDashboard = () => {
           </p>
         </div>
 
-        {/* Cognitive Health, Coins & Gamification Meter */}
+        {/* Cognitive Health, Coins & Companion Meter */}
         <div style={{
           background: 'rgba(255, 255, 255, 0.15)',
           backdropFilter: 'blur(10px)',
@@ -94,7 +101,7 @@ export const PatientDashboard = () => {
           padding: '16px 22px',
           display: 'flex',
           alignItems: 'center',
-          gap: '18px',
+          gap: '14px',
           flexWrap: 'wrap'
         }}>
           {/* Cognitive Score */}
@@ -109,6 +116,36 @@ export const PatientDashboard = () => {
 
           <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.3)' }} />
 
+          {/* Smriti Sathi LLM Companion Button */}
+          <button
+            onClick={() => {
+              setShowReminiscenceChat(true);
+              speakText("Opening Smriti Sathi AI Reminiscence Companion");
+            }}
+            style={{
+              background: 'linear-gradient(135deg, #10b981, #059669)',
+              border: 'none',
+              padding: '8px 14px',
+              borderRadius: '16px',
+              color: 'white',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontWeight: '800',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+            }}
+            title="Talk with AI Memory Companion"
+          >
+            <MessageSquareHeart size={18} />
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: '9px', textTransform: 'uppercase', opacity: 0.9 }}>AI Companion</div>
+              <div style={{ fontSize: '14px', fontWeight: '800' }}>Smriti Sathi 🌸</div>
+            </div>
+          </button>
+
+          <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.3)' }} />
+
           {/* Smriti Coins & Bazaar Rewards */}
           <button
             onClick={() => {
@@ -118,7 +155,7 @@ export const PatientDashboard = () => {
             style={{
               background: 'linear-gradient(135deg, #e9c46a, #f4a261)',
               border: 'none',
-              padding: '8px 16px',
+              padding: '8px 14px',
               borderRadius: '16px',
               color: '#1e293b',
               cursor: 'pointer',
@@ -126,28 +163,27 @@ export const PatientDashboard = () => {
               alignItems: 'center',
               gap: '8px',
               fontWeight: '800',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.2)',
-              transition: 'transform 0.15s'
+              boxShadow: '0 4px 14px rgba(0,0,0,0.2)'
             }}
             title="Open Rewards Bazaar"
           >
-            <Coins size={20} color="#78350f" />
+            <Coins size={18} color="#78350f" />
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '10px', textTransform: 'uppercase', color: '#78350f' }}>Smriti Wallet</div>
-              <div style={{ fontSize: '16px', fontWeight: '900', color: '#451a03' }}>{smritiCoins} Coins 🎁</div>
+              <div style={{ fontSize: '9px', textTransform: 'uppercase', color: '#78350f' }}>Smriti Wallet</div>
+              <div style={{ fontSize: '15px', fontWeight: '900', color: '#451a03' }}>{smritiCoins} Coins</div>
             </div>
           </button>
 
           <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.3)' }} />
 
           {/* Stars & Streak */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '800', color: '#fef08a' }}>
-              <Star size={15} fill="#fef08a" />
-              <span>{dailyStars} Stars Today</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '13px', fontWeight: '800', color: '#fef08a' }}>
+              <Star size={14} fill="#fef08a" />
+              <span>{dailyStars} Stars</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: '700', color: '#ffedd5' }}>
-              <Flame size={15} color="#fb923c" fill="#fb923c" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', fontWeight: '700', color: '#ffedd5' }}>
+              <Flame size={14} color="#fb923c" fill="#fb923c" />
               <span>{dailyStreak}-Day Streak!</span>
             </div>
           </div>
@@ -157,7 +193,7 @@ export const PatientDashboard = () => {
       {/* Google A2A Active Multi-Agent Co-Pilot Widget */}
       <A2ALiveCoPilot />
 
-      {/* 1. Cognitive Games Launcher */}
+      {/* 1. Cognitive Games Launcher (Includes LLM Story Recall Game) */}
       <GameSelector />
 
       {/* 2. Daily Hydration & Custom Medication Reminders */}
@@ -176,25 +212,47 @@ export const PatientDashboard = () => {
             </h2>
           </div>
 
-          <button
-            onClick={() => setShowBazaarModal(true)}
-            style={{
-              background: '#fef3c7',
-              border: '1px solid #fde68a',
-              color: '#92400e',
-              padding: '8px 16px',
-              borderRadius: '12px',
-              fontWeight: '700',
-              fontSize: '13px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              cursor: 'pointer'
-            }}
-          >
-            <ShoppingBag size={16} />
-            <span>Open NER Cultural Bazaar</span>
-          </button>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              onClick={() => setShowReminiscenceChat(true)}
+              style={{
+                background: '#e0f2fe',
+                border: '1px solid #bae6fd',
+                color: '#0369a1',
+                padding: '8px 16px',
+                borderRadius: '12px',
+                fontWeight: '700',
+                fontSize: '13px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                cursor: 'pointer'
+              }}
+            >
+              <MessageSquareHeart size={16} />
+              <span>Talk with Smriti Sathi</span>
+            </button>
+
+            <button
+              onClick={() => setShowBazaarModal(true)}
+              style={{
+                background: '#fef3c7',
+                border: '1px solid #fde68a',
+                color: '#92400e',
+                padding: '8px 16px',
+                borderRadius: '12px',
+                fontWeight: '700',
+                fontSize: '13px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                cursor: 'pointer'
+              }}
+            >
+              <ShoppingBag size={16} />
+              <span>Open Cultural Bazaar</span>
+            </button>
+          </div>
         </div>
 
         <div style={{
@@ -241,9 +299,17 @@ export const PatientDashboard = () => {
       {/* Floating Voice Assistant Avatar */}
       <VoiceAssistant promptText={`${t.welcomeTitle || "Good Morning"} ${t.welcomeSubtitle || ""}`} />
 
+      {/* Real-time Computer Vision Emotion & Gaze Tracking Overlay */}
+      <WebcamVisionOverlay />
+
       {/* Bazaar Rewards Modal */}
       {showBazaarModal && (
         <BazaarRewardsModal onClose={() => setShowBazaarModal(false)} />
+      )}
+
+      {/* Conversational Memory Companion Modal */}
+      {showReminiscenceChat && (
+        <ReminiscenceChatModal onClose={() => setShowReminiscenceChat(false)} />
       )}
     </div>
   );

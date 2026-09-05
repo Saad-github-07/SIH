@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { PATIENT_INFO, WEEKLY_COGNITIVE_TRENDS, CAREGIVER_RISK_ALERTS } from '../../data/sampleAnalytics';
 import { TouchBiometricsMonitor } from './TouchBiometricsMonitor';
+import { LLMCaregiverInsightsCard } from './LLMCaregiverInsightsCard';
+import { WebcamVisionOverlay } from '../vision/WebcamVisionOverlay';
 import { A2AAgentNetworkExplorer } from '../a2a/A2AAgentNetworkExplorer';
 import { A2ALiveCoPilot } from '../a2a/A2ALiveCoPilot';
 import {
@@ -198,6 +200,9 @@ export const CaregiverDashboard = () => {
         </div>
       </div>
 
+      {/* 2. LLM Plain-Language Clinical Insights & Caregiver Digest */}
+      <LLMCaregiverInsightsCard />
+
       {/* 3. AI Touch Dynamics & Motor Biometrics Monitor */}
       <TouchBiometricsMonitor />
 
@@ -336,6 +341,9 @@ export const CaregiverDashboard = () => {
       {showA2AModal && (
         <A2AAgentNetworkExplorer onClose={() => setShowA2AModal(false)} />
       )}
+
+      {/* Real-time Computer Vision Emotion & Gaze Tracking Overlay */}
+      <WebcamVisionOverlay />
     </div>
   );
 };

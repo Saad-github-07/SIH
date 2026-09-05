@@ -8,6 +8,16 @@ export const GameSelector = () => {
 
   const games = [
     {
+      id: 'story',
+      title: 'LLM Cultural Story Recall',
+      desc: 'Listen to personalized cultural stories and test gentle episodic recall memory.',
+      icon: '📖',
+      color: '#047857',
+      badge: 'LLM Generated • Episodic Memory',
+      category: 'MEMORY',
+      stars: 3
+    },
+    {
       id: 'memory',
       title: t.game1Title || 'NER Memory Palace',
       desc: t.game1Desc || 'Match local items like tea baskets, gamusa & traditional pitha.',
@@ -99,7 +109,7 @@ export const GameSelector = () => {
         {/* Category Filters */}
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: 'All 7 Games' },
+            { id: 'ALL', label: 'All 8 Games' },
             { id: 'MEMORY', label: '🧠 Memory' },
             { id: 'CULTURE', label: '🌸 Culture & Music' },
             { id: 'ATTENTION', label: '⚡ Focus & Reflex' },
