@@ -6,7 +6,7 @@
 
 export class CognitiveAIEngine {
   constructor() {
-    this.currentLevel = 1; // 1 = Easy, 2 = Medium, 3 = High
+    this.currentLevel = 1; // 1 = Easy, 2 = Medium, 3 = High ,4 = Very High ,5 = Very Very High 
     this.gameSessions = [];
     this.reactionHistory = [];
     this.errorCount = 0;
