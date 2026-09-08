@@ -1,0 +1,117 @@
+{
+  "$schema": "https://raw.githubusercontent.com/google/A2A/main/specification/agent-card-schema.json",
+  "name": "SmritiNER Cognitive Health & Neurological Telehealth Multi-Agent System",
+  "description": "Official Google A2A (Agent-to-Agent) protocol compliant ecosystem providing culturally-tailored dementia care, motor biometrics telemetry, cognitive therapy, and emergency coordination for the North Eastern Region of India.",
+  "url": "http://localhost:5173",
+  "version": "1.0.0",
+  "protocolVersion": "0.2.0",
+  "endpoints": {
+    "tasks": "http://localhost:5173/api/a2a/tasks",
+    "agentCard": "http://localhost:5173/.well-known/agent.json",
+    "sse": "http://localhost:5173/api/a2a/events"
+  },
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": true,
+    "stateTransitionHistory": true,
+    "multiAgentOrchestration": true,
+    "offlineSyncHandshake": true
+  },
+  "defaultInputModes": ["text", "voice", "touch_telemetry", "json_rpc"],
+  "defaultOutputModes": ["text", "voice", "ui_action", "clinical_report"],
+  "agents": [
+    {
+      "id": "smriti.ner.orchestrator",
+      "name": "SmritiNER Central Cognitive Orchestrator",
+      "role": "Master Coordinator",
+      "description": "Routes tasks between specialized biometrics, reminiscence, cognitive therapy, and caregiver dispatch agents."
+    },
+    {
+      "id": "smriti.ner.biometrics",
+      "name": "NeuroTouch & Motor Biometrics Agent",
+      "role": "Biometrics & Motor Analysis",
+      "description": "Analyzes finger dwell times, micro-jitter tremor variance, and tap precision to monitor Parkinsonian/Alzheimer motor biomarkers."
+    },
+    {
+      "id": "smriti.ner.therapy",
+      "name": "Adaptive Cognitive Game Therapy Agent",
+      "role": "Cognitive Games & DDA",
+      "description": "Dynamically scales difficulty for memory palace, cultural word riddles, and routine sequencing games based on real-time MMSE scoring."
+    },
+    {
+      "id": "smriti.ner.reminiscence",
+      "name": "Family Reminiscence & Cultural Folk Agent",
+      "role": "Memory Care & Reminiscence",
+      "description": "Generates soothing North-Eastern folk stories in 8 regional languages, triggers family voice memos, and activates localized memory cues."
+    },
+    {
+      "id": "smriti.ner.caregiver",
+      "name": "Caregiver & Medical Dispatch Coordinator Agent",
+      "role": "Clinical Health & Alert Dispatch",
+      "description": "Compiles reimbursable CPT 99453 telehealth reports, logs ICD-10 codes, and dispatches critical medication alerts."
+    }
+  ],
+  "skills": [
+    {
+      "id": "analyze_touch_biometrics",
+      "name": "Analyze Touch Dynamics & Tremor",
+      "description": "Processes fine-motor touch dwell times, micro-jitter spatial variance, and tap precision offset to detect Parkinsonian/Alzheimer motor biomarkers.",
+      "agentId": "smriti.ner.biometrics",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "dwellTimeMs": { "type": "number", "description": "Touch hold duration in milliseconds" },
+          "jitterVariance": { "type": "number", "description": "Spatial variance in pixels" },
+          "precisionOffsetPx": { "type": "number", "description": "Offset from target center" }
+        },
+        "required": ["dwellTimeMs", "jitterVariance"]
+      },
+      "tags": ["biometrics", "neurology", "telemetry"]
+    },
+    {
+      "id": "generate_cognitive_exercise",
+      "name": "Adaptive Cognitive Game Therapy",
+      "description": "Dynamically scales difficulty for memory palace, cultural word riddles, and routine sequencing games based on patient MMSE trajectory.",
+      "agentId": "smriti.ner.therapy",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "currentScore": { "type": "number", "minimum": 0, "maximum": 100 },
+          "gameCategory": { "type": "string", "enum": ["memory", "pattern", "routine", "word", "garden", "bazaar", "sound"] }
+        },
+        "required": ["gameCategory"]
+      },
+      "tags": ["cognition", "gaming", "therapy"]
+    },
+    {
+      "id": "retrieve_family_reminiscence",
+      "name": "Family Reminiscence & Voice Guide",
+      "description": "Synthesizes regional folk stories, triggers soothing family voice memos, and activates localized memory cues.",
+      "agentId": "smriti.ner.reminiscence",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "language": { "type": "string", "enum": ["as", "bn", "mni", "lus", "brx", "kha", "hi", "en"] },
+          "familyMemberId": { "type": "string" }
+        },
+        "required": ["language"]
+      },
+      "tags": ["memory", "reminiscence", "culture"]
+    },
+    {
+      "id": "dispatch_caregiver_alert",
+      "name": "Emergency & Caregiver Telehealth Dispatch",
+      "description": "Compiles clinical neurological PDF records, CPT 99453 telemetry codes, and alerts local PHC workers.",
+      "agentId": "smriti.ner.caregiver",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "alertSeverity": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+          "reason": { "type": "string" }
+        },
+        "required": ["alertSeverity", "reason"]
+      },
+      "tags": ["emergency", "caregiver", "telehealth"]
+    }
+  ]
+}
