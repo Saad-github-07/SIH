@@ -1,5 +1,5 @@
 /**
- * Google A2A (Agent-to-Agent) Protocol Core Engine for SmritiNER
+ * Google A2A (Agent-to-Agent) Protocol Core Engine for Arclight AI
  * Specification: https://github.com/google/A2A
  * 
  * Provides:
@@ -15,7 +15,7 @@ import { aiEngineInstance } from './aiEngine';
 import { speechService } from './speechService';
 
 export const SMRITI_A2A_AGENT_CARD = {
-  name: "SmritiNER Cognitive Health Multi-Agent System",
+  name: "Arclight Cognitive Health Multi-Agent System",
   description: "Official Google A2A protocol-compliant ecosystem for dementia care, motor biometrics, cognitive therapy, and emergency coordination in North-East India.",
   url: "http://localhost:5173",
   version: "1.0.0",

@@ -237,7 +237,8 @@ export const INITIAL_REMINISCENCE_CARDS = [
     name: 'Rahul Phukan',
     relationship: 'Son (পুত্র / ল’ৰা)',
     location: 'Guwahati, Assam',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
     voiceMemoText: 'Kaka, this is your son Rahul! Remember we visited Kaziranga together last month?',
     frequentMemory: 'Enjoys morning walks together in Dighalipukhuri park'
   },
@@ -246,7 +247,8 @@ export const INITIAL_REMINISCENCE_CARDS = [
     name: 'Anamika Sharma',
     relationship: 'Daughter (কন্যা / ছোৱালী)',
     location: 'Shillong, Meghalaya',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
+    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
     voiceMemoText: 'Deta, Anamika here! I made your favorite Til Pitha for your upcoming visit!',
     frequentMemory: 'Calls every evening at 6 PM without fail'
   },
@@ -255,7 +257,8 @@ export const INITIAL_REMINISCENCE_CARDS = [
     name: 'Aarav Phukan',
     relationship: 'Grandson (নাতি)',
     location: 'Guwahati, Assam',
-    photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80',
+    photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80',
+    photoUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80',
     voiceMemoText: 'Kaitu Kaka! Aarav here, ready to play the memory card game with you!',
     frequentMemory: 'Loves listening to Kaka tell stories about old times'
   }

@@ -11,13 +11,13 @@ export const LANGUAGES = [
 
 export const TRANSLATIONS = {
   en: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "Cognitive Therapy & Memory Assistance for North East India",
     patientMode: "Patient Mode",
     caregiverDashboard: "Caregiver & Doctor Portal",
     welcomeTitle: "Good Morning, Kaka!",
     welcomeSubtitle: "Let's keep your mind active and healthy today.",
-    voiceAssistantName: "Smriti-Mitra",
+    voiceAssistantName: "Arclight-Mitra",
     voiceAssistantSubtitle: "Your Voice Companion",
     voicePrompt: "Click any item to hear audio guidance in your language.",
     
@@ -76,7 +76,7 @@ export const TRANSLATIONS = {
   },
 
   as: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "উত্তৰ-পূৰ্বাঞ্চলৰ বাবে মস্তিষ্কৰ ব্যায়াম আৰু স্মৃতি সহায়ক মঞ্চ",
     patientMode: "ৰোগীৰ সূচী (Patient)",
     caregiverDashboard: "সেৱাকৰ্তা আৰু চিকিৎসক ড্যাশবৰ্ড",
@@ -135,7 +135,7 @@ export const TRANSLATIONS = {
   },
 
   bn: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "উত্তর-পূর্ব ভারতের জন্য মস্তিষ্ক ব্যায়াম ও স্মৃতি সহায়তা",
     patientMode: "রোগী মোড",
     caregiverDashboard: "সেবাদানকারী ও ডাক্তার পোর্টাল",
@@ -188,13 +188,13 @@ export const TRANSLATIONS = {
   },
 
   mni: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "North East India gi Oiba Pukning Ningthina Thambanaba Digital Platform",
     patientMode: "Pebam Mipuk (Patient)",
     caregiverDashboard: "Caregiver & Doctor Portal",
     welcomeTitle: "Numit Nungaiyare, Pupu!",
     welcomeSubtitle: "Ngasi ahanba pukning kanglon thabak tuminna tougasi.",
-    voiceAssistantName: "Smriti-Mitra",
+    voiceAssistantName: "Arclight-Mitra",
     voiceAssistantSubtitle: "Nahaigi Khonjel Mateng",
     voicePrompt: "Khonjel tabagi damak oina khutta nammi.",
     offlineStatus: "Offline Engine Active",
@@ -241,13 +241,13 @@ export const TRANSLATIONS = {
   },
 
   mzo: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "North East India Pute leh Pi te Rilru Hriselna leh Hriatreuna Tikhawrtu",
     patientMode: "Pute/Pi Mode",
     caregiverDashboard: "Zuk-Zuitu & Dawkta Dashboard",
     welcomeTitle: "Chibai, Pu Biren!",
     welcomeSubtitle: "Vawin hian i rilru i hahdamin tir ang u.",
-    voiceAssistantName: "Smriti-Mitra",
+    voiceAssistantName: "Arclight-Mitra",
     voiceAssistantSubtitle: "I Aw Paitu",
     voicePrompt: "I tawng anga ngaiithlak turin hmet rawh.",
     offlineStatus: "Offline-ah a thawk thei",
@@ -294,7 +294,7 @@ export const TRANSLATIONS = {
   },
 
   brx: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "सांथान आरो गोसोखांनाय बांद्राय मदद सोलोंथाय",
     patientMode: "सुबुं मड (Patient)",
     caregiverDashboard: "नायगिरि आरो डाक्टर पोर्टेल",
@@ -347,13 +347,13 @@ export const TRANSLATIONS = {
   },
 
   kha: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "Ka Jingkyrshan Kynmaw & Jingkoit Jingkhiah ka Jingmut na bynta ka Dong Shatei Lam Mihngi",
     patientMode: "Kynthei/Shynrang Tymmen Mode",
     caregiverDashboard: "Caregiver & Portal Doctor",
     welcomeTitle: "Khai Suk Mynstep, Paieit Biren!",
     welcomeSubtitle: "To ngin pynkhlain iaka jingmut samla ynnai.",
-    voiceAssistantName: "Smriti-Mitra",
+    voiceAssistantName: "Arclight-Mitra",
     voiceAssistantSubtitle: "U Nongkyrshan Sur",
     voicePrompt: "Khit ha kano kano ka khana ba pynoh sur ha ka ktien jong phi.",
     offlineStatus: "Offline Engine Lah treikam",
@@ -400,7 +400,7 @@ export const TRANSLATIONS = {
   },
 
   hi: {
-    appTitle: "SmritiNER",
+    appTitle: "Arclight",
     tagline: "उत्तर-पूर्व भारत के लिए संज्ञानात्मक गेमिंग एवं स्मृति सहायक मंच",
     patientMode: "रोगी मोड (Patient)",
     caregiverDashboard: "देखभालकर्ता एवं चिकित्सक पोर्टल",

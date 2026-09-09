@@ -50,36 +50,37 @@ export const ReminiscenceWall = () => {
   }).sort((a, b) => (b.starred ? 1 : 0) - (a.starred ? 1 : 0));
 
   return (
-    <div style={{ marginTop: '36px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+    <div style={{ marginTop: '40px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px', flexWrap: 'wrap', gap: '14px' }}>
         <div>
-          <h2 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary-emerald)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Heart size={24} style={{ color: '#e11d48' }} />
+          <h2 style={{ fontSize: '28px', fontWeight: '900', color: 'var(--primary-emerald)', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Heart size={28} style={{ color: '#e11d48' }} />
             {t.reminiscenceTitle}
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '17px', fontWeight: '600', marginTop: '4px' }}>
             {t.reminiscenceSubtitle}
           </p>
         </div>
 
         {/* Search & Add Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
             background: 'white',
-            border: '1px solid var(--card-border)',
-            borderRadius: '12px',
-            padding: '6px 12px'
+            border: '2px solid var(--card-border)',
+            borderRadius: '14px',
+            padding: '8px 16px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
           }}>
-            <Search size={16} color="var(--text-muted)" />
+            <Search size={18} color="var(--text-muted)" />
             <input
               type="text"
               placeholder="Search family member..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ border: 'none', outline: 'none', fontSize: '13px', width: '160px' }}
+              style={{ border: 'none', outline: 'none', fontSize: '15px', width: '180px', fontWeight: '600' }}
             />
           </div>
 
@@ -89,178 +90,156 @@ export const ReminiscenceWall = () => {
               setIsModalOpen(true);
             }}
             className="btn-primary"
-            style={{ padding: '8px 16px' }}
+            style={{ padding: '10px 20px', fontSize: '16px', borderRadius: '16px' }}
           >
-            <Plus size={18} />
+            <Plus size={20} />
             <span>Add Family Member</span>
           </button>
         </div>
       </div>
 
       {filteredMembers.length === 0 ? (
-        <div className="glass-card" style={{ textAlign: 'center', padding: '40px 20px' }}>
-          <Heart size={40} style={{ color: '#e11d48', margin: '0 auto 12px auto', opacity: 0.7 }} />
-          <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '6px' }}>No family members found</h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '16px' }}>
-            Click "Add Family Member" to upload photos and save audio memories for your loved one.
-          </p>
-          <button
-            className="btn-primary"
-            onClick={() => {
-              setEditingMember(null);
-              setIsModalOpen(true);
-            }}
-            style={{ margin: '0 auto' }}
-          >
-            <Plus size={18} />
-            <span>Add First Family Member</span>
-          </button>
+        <div className="glass-card" style={{ textAlign: 'center', padding: '40px' }}>
+          <p style={{ fontSize: '18px', color: 'var(--text-muted)', fontWeight: '600' }}>No family members found matching "{searchQuery}".</p>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px'
+        }}>
           {filteredMembers.map((card) => (
-            <div
-              key={card.id}
-              className="glass-card"
-              style={{
-                padding: '20px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                border: card.starred ? '2px solid #e9c46a' : '1px solid var(--card-border)',
-                position: 'relative'
-              }}
-            >
+            <div key={card.id} className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ position: 'relative', height: '200px', borderRadius: '16px', overflow: 'hidden', marginBottom: '16px' }}>
+                <div style={{ position: 'relative', borderRadius: '18px', overflow: 'hidden', height: '220px', marginBottom: '16px', border: '2px solid var(--card-border)' }}>
                   <img
-                    src={card.photo}
+                    src={card.photoUrl || card.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'}
                     alt={card.name}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
+                    }}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
-                  <span style={{
+                  <div style={{
                     position: 'absolute',
                     top: '12px',
+                    right: '12px',
+                    display: 'flex',
+                    gap: '6px'
+                  }}>
+                    <button
+                      onClick={() => toggleStarFamilyMember(card.id)}
+                      style={{
+                        background: 'rgba(255,255,255,0.9)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '36px',
+                        height: '36px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer'
+                      }}
+                      title="Star favorite family member"
+                    >
+                      <Star size={18} fill={card.starred ? '#f59e0b' : 'none'} color={card.starred ? '#f59e0b' : '#64748b'} />
+                    </button>
+
+                    <button
+                      onClick={() => handleEdit(card)}
+                      style={{
+                        background: 'rgba(255,255,255,0.9)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '36px',
+                        height: '36px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer'
+                      }}
+                      title="Edit details"
+                    >
+                      <Edit2 size={16} color="#0f172a" />
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(card.id)}
+                      style={{
+                        background: 'rgba(255,255,255,0.9)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '36px',
+                        height: '36px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer'
+                      }}
+                      title="Delete card"
+                    >
+                      <Trash2 size={16} color="#dc2626" />
+                    </button>
+                  </div>
+
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '12px',
                     left: '12px',
-                    background: 'rgba(0,0,0,0.65)',
+                    background: 'rgba(27, 67, 50, 0.85)',
                     color: 'white',
                     padding: '4px 12px',
                     borderRadius: '20px',
-                    fontSize: '12px',
-                    fontWeight: '700',
-                    backdropFilter: 'blur(4px)'
+                    fontSize: '13px',
+                    fontWeight: '800'
                   }}>
                     {card.relationship}
                   </span>
-
-                  {/* Star Favorite Button */}
-                  <button
-                    onClick={() => toggleStarFamilyMember(card.id)}
-                    title={card.starred ? "Unstar" : "Star favorite"}
-                    style={{
-                      position: 'absolute',
-                      top: '12px',
-                      right: '12px',
-                      background: 'rgba(0,0,0,0.65)',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: '32px',
-                      height: '32px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      color: card.starred ? '#e9c46a' : 'white',
-                      backdropFilter: 'blur(4px)'
-                    }}
-                  >
-                    <Star size={16} fill={card.starred ? '#e9c46a' : 'none'} />
-                  </button>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div>
-                    <h3 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-dark)' }}>
-                      {card.name}
-                    </h3>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--text-muted)', fontSize: '13px', margin: '4px 0 12px 0' }}>
-                      <MapPin size={14} />
-                      <span>{card.location || 'North East India'}</span>
-                    </div>
-                  </div>
+                <h3 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                  {card.name}
+                </h3>
 
-                  {/* Edit / Delete Options */}
-                  <div style={{ display: 'flex', gap: '4px' }}>
-                    <button
-                      onClick={() => handleEdit(card)}
-                      title="Edit family memory"
-                      style={{
-                        background: '#f1f5f9',
-                        border: 'none',
-                        borderRadius: '8px',
-                        width: '28px',
-                        height: '28px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        color: 'var(--text-muted)'
-                      }}
-                    >
-                      <Edit2 size={13} />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(card.id)}
-                      title="Remove from wall"
-                      style={{
-                        background: '#fee2e2',
-                        border: 'none',
-                        borderRadius: '8px',
-                        width: '28px',
-                        height: '28px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        color: '#dc2626'
-                      }}
-                    >
-                      <Trash2 size={13} />
-                    </button>
+                {card.location && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-muted)', fontSize: '14px', marginBottom: '12px', fontWeight: '600' }}>
+                    <MapPin size={16} color="#0077b6" />
+                    <span>{card.location}</span>
                   </div>
-                </div>
+                )}
 
-                <p style={{ fontSize: '13px', color: 'var(--text-muted)', background: 'rgba(27, 67, 50, 0.04)', padding: '10px 14px', borderRadius: '12px' }}>
-                  💡 <strong>Memory Note:</strong> {card.frequentMemory}
+                <p style={{ fontSize: '15px', color: 'var(--text-muted)', lineHeight: '1.5', fontStyle: 'italic', marginBottom: '18px' }}>
+                  "{card.voiceMemoText}"
                 </p>
               </div>
 
               <button
-                className="btn-primary"
                 onClick={() => handlePlayVoice(card)}
+                className="btn-primary"
                 style={{
-                  marginTop: '18px',
                   width: '100%',
-                  background: activeVoiceId === card.id ? '#e9c46a' : 'linear-gradient(135deg, #1b4332, #2d6a4f)',
-                  color: activeVoiceId === card.id ? 'black' : 'white',
-                  justifyContent: 'center'
+                  background: activeVoiceId === card.id ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #1b4332, #2d6a4f)',
+                  fontSize: '16px',
+                  padding: '12px 18px',
+                  borderRadius: '16px'
                 }}
               >
-                <Volume2 size={18} />
-                {activeVoiceId === card.id ? "Playing Voice Note..." : (t.playVoiceNote || "Play Voice Note")}
+                <Volume2 size={20} className={activeVoiceId === card.id ? 'spin' : ''} />
+                <span>{activeVoiceId === card.id ? 'Playing Voice Clip...' : 'Play Voice Note 🔊'}</span>
               </button>
             </div>
           ))}
         </div>
       )}
 
-      {/* Add / Edit Family Member Modal */}
-      <FamilyMemberModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        editingMember={editingMember}
-      />
+      {isModalOpen && (
+        <FamilyMemberModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          memberToEdit={editingMember}
+        />
+      )}
     </div>
   );
 };
-

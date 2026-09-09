@@ -64,12 +64,12 @@ export const DailyRemindersCard = () => {
                   <Droplet size={24} />
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '18px', fontWeight: '800', color: 'var(--text-dark)' }}>{t.hydrationGoal || "Water Hydration Goal"}</h3>
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Daily Hydration Target: {hydrationGoal} glasses</p>
+                  <h3 style={{ fontSize: '22px', fontWeight: '900', color: 'var(--text-dark)' }}>{t.hydrationGoal || "Water Hydration Goal"}</h3>
+                  <p style={{ fontSize: '15px', color: 'var(--text-muted)', fontWeight: '600' }}>Daily Hydration Target: {hydrationGoal} glasses</p>
                 </div>
               </div>
 
-              <span style={{ fontSize: '24px', fontWeight: '800', color: '#0284c7' }}>
+              <span style={{ fontSize: '28px', fontWeight: '900', color: '#0284c7' }}>
                 {hydrationCount}/{hydrationGoal}
               </span>
             </div>
@@ -117,34 +117,32 @@ export const DailyRemindersCard = () => {
                     }}
                     title={isFilled ? `Glass ${idx + 1} logged (Click to undo)` : `Glass ${idx + 1} (Click to log)`}
                     style={{
-                      width: '32px',
-                      height: '38px',
-                      borderRadius: '8px',
-                      border: isFilled ? '2px solid #0284c7' : '1px dashed #94a3b8',
-                      background: isFilled ? '#e0f2fe' : 'white',
+                      width: '36px',
+                      height: '42px',
+                      borderRadius: '10px',
+                      border: isFilled ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                      background: isFilled ? '#f0f9ff' : 'white',
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '18px',
                       cursor: 'pointer',
-                      transform: isFilled ? 'scale(1.05)' : 'scale(1)',
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <span>{isFilled ? '🥛' : '🤍'}</span>
+                    <Droplet size={20} color={isFilled ? '#0284c7' : '#94a3b8'} fill={isFilled ? '#0284c7' : 'none'} />
                   </button>
                 );
               })}
             </div>
 
-            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px', textAlign: 'center' }}>
+            <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '16px', textAlign: 'center', fontWeight: '600' }}>
               {hydrationCount >= hydrationGoal ? (
-                <strong style={{ color: '#16a34a' }}>🎉 Fantastic! 8/8 Daily hydration goal achieved!</strong>
+                <strong style={{ color: '#16a34a' }}>Daily hydration goal achieved ({hydrationCount}/{hydrationGoal} glasses)!</strong>
               ) : hydrationCount === 0 ? (
-                <span>☀️ Start your day with a fresh glass of water!</span>
+                <span>Start your day with a fresh glass of water.</span>
               ) : (
-                <span>💡 <strong>{hydrationGoal - hydrationCount} glasses</strong> remaining to reach target.</span>
+                <span><strong>{hydrationGoal - hydrationCount} glasses</strong> remaining to reach your target.</span>
               )}
             </p>
           </div>
@@ -229,8 +227,8 @@ export const DailyRemindersCard = () => {
                 <Pill size={24} />
               </div>
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '800', color: 'var(--text-dark)' }}>{t.medicationTitle}</h3>
-                <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                <h3 style={{ fontSize: '22px', fontWeight: '900', color: 'var(--text-dark)' }}>{t.medicationTitle}</h3>
+                <p style={{ fontSize: '15px', color: 'var(--text-muted)', fontWeight: '600' }}>
                   {completedCount} of {reminders.length} doses completed today
                 </p>
               </div>
@@ -245,19 +243,19 @@ export const DailyRemindersCard = () => {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                padding: '7px 14px',
-                borderRadius: '12px',
+                gap: '8px',
+                padding: '10px 18px',
+                borderRadius: '14px',
+                fontSize: '15px',
+                fontWeight: '800',
                 background: 'linear-gradient(135deg, #1b4332, #2d6a4f)',
                 color: 'white',
                 border: 'none',
-                fontWeight: '700',
-                fontSize: '13px',
                 cursor: 'pointer',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
+                boxShadow: '0 4px 10px rgba(27,67,50,0.18)'
               }}
             >
-              <Plus size={16} />
+              <Plus size={18} />
               <span>Add Medicine</span>
             </button>
           </div>

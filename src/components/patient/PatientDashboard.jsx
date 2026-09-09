@@ -64,44 +64,44 @@ export const PatientDashboard = () => {
 
   return (
     <div className="fade-in" style={{ maxWidth: '1240px', margin: '0 auto', paddingBottom: '80px' }}>
-      {/* Top Welcome Banner */}
+      {/* Top Executive Patient Banner */}
       <div className="glass-card" style={{
-        background: 'linear-gradient(135deg, rgba(27, 67, 50, 0.95), rgba(45, 106, 79, 0.9))',
+        background: 'linear-gradient(135deg, #0f291e 0%, #1b4332 100%)',
         color: 'white',
-        padding: '32px',
-        borderRadius: '28px',
+        padding: '30px 32px',
+        borderRadius: '24px',
         marginBottom: '28px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
         gap: '20px',
-        boxShadow: '0 12px 30px rgba(27,67,50,0.25)'
+        boxShadow: '0 10px 25px rgba(15, 41, 30, 0.2)'
       }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#e9c46a', marginBottom: '8px' }}>
-            <Sun size={24} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#14b8a6', marginBottom: '6px' }}>
+            <Sun size={20} />
             <span style={{ fontWeight: '700', fontSize: '15px' }}>Dispur, Guwahati • 24°C Pleasant & Sunny</span>
           </div>
 
-          <h1 style={{ fontSize: '32px', fontWeight: '800', marginBottom: '6px' }}>
+          <h1 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '4px', letterSpacing: '-0.5px' }}>
             {t.welcomeTitle || "Good Morning, Kaka!"}
           </h1>
-          <p style={{ fontSize: '16px', opacity: 0.9 }}>
+          <p style={{ fontSize: '17px', opacity: 0.9 }}>
             {t.welcomeSubtitle || "Let's keep your mind active, sharp, and joyful today with fun activities."}
           </p>
         </div>
 
         {/* Cognitive Health, Coins & Companion Meter */}
         <div style={{
-          background: 'rgba(255, 255, 255, 0.15)',
+          background: 'rgba(255, 255, 255, 0.1)',
           backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.25)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
           borderRadius: '20px',
           padding: '16px 22px',
           display: 'flex',
           alignItems: 'center',
-          gap: '14px',
+          gap: '16px',
           flexWrap: 'wrap'
         }}>
           {/* Cognitive Score */}
@@ -109,72 +109,72 @@ export const PatientDashboard = () => {
             <div style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px', opacity: 0.85 }}>
               {t.cognitiveHealthScore || "Cognitive Health"}
             </div>
-            <div style={{ fontSize: '30px', fontWeight: '800', color: '#e9c46a' }}>
-              {cognitiveScore} <span style={{ fontSize: '14px' }}>/ 100</span>
+            <div style={{ fontSize: '28px', fontWeight: '900', color: '#14b8a6' }}>
+              {cognitiveScore} <span style={{ fontSize: '14px', color: 'rgba(255,255,255,0.7)' }}>/ 100</span>
             </div>
           </div>
 
-          <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.3)' }} />
+          <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.2)' }} />
 
-          {/* Smriti Sathi LLM Companion Button */}
+          {/* Arclight Sathi Companion Button */}
           <button
             onClick={() => {
               setShowReminiscenceChat(true);
-              speakText("Opening Smriti Sathi AI Reminiscence Companion");
+              speakText("Opening Arclight Sathi Reminiscence Companion");
             }}
             style={{
-              background: 'linear-gradient(135deg, #10b981, #059669)',
+              background: '#0d9488',
               border: 'none',
-              padding: '8px 14px',
-              borderRadius: '16px',
+              padding: '10px 18px',
+              borderRadius: '14px',
               color: 'white',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              fontWeight: '800',
+              gap: '8px',
+              fontWeight: '700',
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
             }}
-            title="Talk with AI Memory Companion"
+            title="Talk with Memory Companion"
           >
-            <MessageSquareHeart size={18} />
+            <MessageSquareHeart size={20} />
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '9px', textTransform: 'uppercase', opacity: 0.9 }}>AI Companion</div>
-              <div style={{ fontSize: '14px', fontWeight: '800' }}>Smriti Sathi 🌸</div>
+              <div style={{ fontSize: '10px', textTransform: 'uppercase', opacity: 0.85, letterSpacing: '0.5px' }}>Memory Companion</div>
+              <div style={{ fontSize: '15px', fontWeight: '800' }}>Arclight Sathi</div>
             </div>
           </button>
 
-          <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.3)' }} />
+          <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.2)' }} />
 
-          {/* Smriti Coins & Bazaar Rewards */}
+          {/* Arclight Coins & Bazaar Rewards */}
           <button
             onClick={() => {
               setShowBazaarModal(true);
-              speakText("Opening NER Cultural Bazaar Rewards Store");
+              speakText("Opening Arclight Cultural Bazaar Rewards Store");
             }}
             style={{
-              background: 'linear-gradient(135deg, #e9c46a, #f4a261)',
+              background: '#d97706',
               border: 'none',
-              padding: '8px 14px',
-              borderRadius: '16px',
-              color: '#1e293b',
+              padding: '10px 18px',
+              borderRadius: '14px',
+              color: 'white',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              fontWeight: '800',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.2)'
+              fontWeight: '700',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
             }}
             title="Open Rewards Bazaar"
           >
-            <Coins size={18} color="#78350f" />
+            <Coins size={20} color="#ffffff" />
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '9px', textTransform: 'uppercase', color: '#78350f' }}>Smriti Wallet</div>
-              <div style={{ fontSize: '15px', fontWeight: '900', color: '#451a03' }}>{smritiCoins} Coins</div>
+              <div style={{ fontSize: '10px', textTransform: 'uppercase', opacity: 0.85, letterSpacing: '0.5px' }}>Arclight Wallet</div>
+              <div style={{ fontSize: '15px', fontWeight: '800' }}>{smritiCoins} Coins</div>
             </div>
           </button>
 
-          <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.3)' }} />
+          <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.2)' }} />
 
           {/* Stars & Streak */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
@@ -189,9 +189,6 @@ export const PatientDashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* Google A2A Active Multi-Agent Co-Pilot Widget */}
-      <A2ALiveCoPilot />
 
       {/* 1. Cognitive Games Launcher (Includes LLM Story Recall Game) */}
       <GameSelector />
@@ -212,45 +209,45 @@ export const PatientDashboard = () => {
             </h2>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <button
               onClick={() => setShowReminiscenceChat(true)}
               style={{
                 background: '#e0f2fe',
-                border: '1px solid #bae6fd',
+                border: '2px solid #bae6fd',
                 color: '#0369a1',
-                padding: '8px 16px',
-                borderRadius: '12px',
-                fontWeight: '700',
-                fontSize: '13px',
+                padding: '10px 18px',
+                borderRadius: '14px',
+                fontWeight: '800',
+                fontSize: '15px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '8px',
                 cursor: 'pointer'
               }}
             >
-              <MessageSquareHeart size={16} />
-              <span>Talk with Smriti Sathi</span>
+              <MessageSquareHeart size={18} />
+              <span>Talk with Arclight Sathi</span>
             </button>
 
             <button
               onClick={() => setShowBazaarModal(true)}
               style={{
                 background: '#fef3c7',
-                border: '1px solid #fde68a',
+                border: '2px solid #fde68a',
                 color: '#92400e',
-                padding: '8px 16px',
-                borderRadius: '12px',
-                fontWeight: '700',
-                fontSize: '13px',
+                padding: '10px 18px',
+                borderRadius: '14px',
+                fontWeight: '800',
+                fontSize: '15px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '8px',
                 cursor: 'pointer'
               }}
             >
-              <ShoppingBag size={16} />
-              <span>Open Cultural Bazaar</span>
+              <ShoppingBag size={18} />
+              <span>Open Arclight Bazaar</span>
             </button>
           </div>
         </div>
@@ -298,9 +295,6 @@ export const PatientDashboard = () => {
 
       {/* Floating Voice Assistant Avatar */}
       <VoiceAssistant promptText={`${t.welcomeTitle || "Good Morning"} ${t.welcomeSubtitle || ""}`} />
-
-      {/* Real-time Computer Vision Emotion & Gaze Tracking Overlay */}
-      <WebcamVisionOverlay />
 
       {/* Bazaar Rewards Modal */}
       {showBazaarModal && (

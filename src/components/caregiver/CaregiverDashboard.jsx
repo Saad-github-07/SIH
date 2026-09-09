@@ -44,25 +44,25 @@ export const CaregiverDashboard = () => {
             <button
               onClick={() => {
                 setShowA2AModal(true);
-                speakText("Opening Google A2A Agent Protocol Hub");
+                speakText("Opening Arclight A2A Agent Protocol Hub");
               }}
               style={{
                 background: 'linear-gradient(135deg, #0077b6, #023e8a)',
                 color: 'white',
                 border: 'none',
-                padding: '10px 18px',
-                borderRadius: '14px',
-                fontSize: '14px',
-                fontWeight: '700',
+                padding: '12px 20px',
+                borderRadius: '16px',
+                fontSize: '15px',
+                fontWeight: '800',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
                 cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(0, 119, 182, 0.25)'
+                boxShadow: '0 4px 14px rgba(0, 119, 182, 0.25)'
               }}
             >
-              <Network size={18} />
-              <span>Google A2A Hub</span>
+              <Network size={20} />
+              <span>Arclight A2A Hub</span>
             </button>
 
             <button
@@ -87,14 +87,14 @@ export const CaregiverDashboard = () => {
             width: '56px',
             height: '56px',
             borderRadius: '16px',
-            background: '#e8f5e9',
+            background: '#f0fdf4',
             color: 'var(--primary-emerald)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '24px'
+            border: '1px solid #bbf7d0'
           }}>
-            👴
+            <User size={26} color="#0f291e" />
           </div>
           <div>
             <div style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: '600' }}>PATIENT PROFILE</div>
@@ -148,9 +148,6 @@ export const CaregiverDashboard = () => {
         </div>
       </div>
 
-      {/* Google A2A Active Multi-Agent Co-Pilot Widget */}
-      <A2ALiveCoPilot />
-
       {/* Analytics Charts Section */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '24px', marginBottom: '32px' }}>
         {/* 1. Cognitive Performance Chart */}
@@ -200,10 +197,7 @@ export const CaregiverDashboard = () => {
         </div>
       </div>
 
-      {/* 2. LLM Plain-Language Clinical Insights & Caregiver Digest */}
-      <LLMCaregiverInsightsCard />
-
-      {/* 3. AI Touch Dynamics & Motor Biometrics Monitor */}
+      {/* 2. AI Touch Dynamics & Motor Biometrics Monitor */}
       <TouchBiometricsMonitor />
 
       {/* 4. Automated Dementia Risk Alerts */}
@@ -285,7 +279,7 @@ export const CaregiverDashboard = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <h2 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary-emerald)' }}>
-                    SmritiNER Neurological & Cognitive Biometrics Report
+                    Arclight Neurological & Cognitive Biometrics Report
                   </h2>
                   <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
                     Continuous AI Touch Dynamics & Behavioral Monitoring for Neurological Consultation
@@ -319,7 +313,7 @@ export const CaregiverDashboard = () => {
                 <li><strong>Tap Precision Accuracy:</strong> 94% Center Hit Rate (±6.4px Average Dispersion)</li>
                 <li><strong>7-Day Score Trajectory:</strong> +4% improvement in spatial item recall</li>
                 <li><strong>Avg Reaction Speed:</strong> 3.4 seconds (Optimal range for age 74)</li>
-                <li><strong>Medication Compliance Rate:</strong> 94% (Logged via SmritiNER Schedule)</li>
+                <li><strong>Medication Compliance Rate:</strong> 94% (Logged via Arclight Schedule)</li>
                 <li><strong>Hydration Rate:</strong> 7.3 / 8 glasses daily average</li>
               </ul>
             </div>
@@ -341,9 +335,6 @@ export const CaregiverDashboard = () => {
       {showA2AModal && (
         <A2AAgentNetworkExplorer onClose={() => setShowA2AModal(false)} />
       )}
-
-      {/* Real-time Computer Vision Emotion & Gaze Tracking Overlay */}
-      <WebcamVisionOverlay />
     </div>
   );
 };

@@ -132,6 +132,7 @@ export const FamilyMemberModal = ({ isOpen, onClose, editingMember = null }) => 
       relationship,
       location: location.trim(),
       photo,
+      photoUrl: photo,
       voiceMemoText: voiceMemoText.trim() || `Kaka, sending warm wishes from ${name}!`,
       frequentMemory: frequentMemory.trim() || 'Treasured family memory',
       audioBlobUrl: audioUrl

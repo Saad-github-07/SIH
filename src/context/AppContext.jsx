@@ -83,7 +83,12 @@ export const AppProvider = ({ children }) => {
     try {
       const saved = localStorage.getItem('smriti_family_members');
       const parsed = saved ? JSON.parse(saved) : null;
-      return Array.isArray(parsed) && parsed.length > 0 ? parsed : INITIAL_REMINISCENCE_CARDS;
+      const list = Array.isArray(parsed) && parsed.length > 0 ? parsed : INITIAL_REMINISCENCE_CARDS;
+      return list.map(m => ({
+        ...m,
+        photo: m.photo || m.photoUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+        photoUrl: m.photoUrl || m.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'
+      }));
     } catch (e) {
       return INITIAL_REMINISCENCE_CARDS;
     }

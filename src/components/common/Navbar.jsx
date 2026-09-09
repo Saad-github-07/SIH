@@ -1,213 +1,147 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { LANGUAGES } from '../../data/translations';
-import { Volume2, VolumeX, Eye, Wifi, WifiOff, RefreshCw, UserCheck, ShieldAlert, User, Network } from 'lucide-react';
-import { AppwriteAuthModal } from './AppwriteAuthModal';
-import { A2AAgentNetworkExplorer } from '../a2a/A2AAgentNetworkExplorer';
+import { Brain, Volume2, VolumeX, Eye, Wifi, WifiOff, RefreshCw, UserCheck, ShieldAlert, User, Gamepad2, Bot, Settings, Sparkles } from 'lucide-react';
 
 export const Navbar = () => {
   const {
     language,
-    setLanguage,
     t,
     activeTab,
     setActiveTab,
     highContrast,
     setHighContrast,
-    voiceEnabled,
-    setVoiceEnabled,
     syncStatus,
     triggerCloudSync,
     speakText
   } = useApp();
 
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [isA2AOpen, setIsA2AOpen] = useState(false);
-
   return (
-    <>
-      <header className="app-navbar">
-        <div className="nav-container">
-          {/* Brand */}
-          <div className="brand-logo">
-            <div className="brand-icon">🧠</div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span className="brand-title">{t.appTitle}</span>
-                <span className="brand-badge">NER AI</span>
-              </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{t.tagline}</p>
-            </div>
+    <header className="app-navbar">
+      <div className="nav-container">
+        {/* Brand */}
+        <div className="brand-logo" onClick={() => setActiveTab('patient')}>
+          <div className="brand-icon">
+            <Brain size={26} color="#14b8a6" />
           </div>
-
-          {/* Tab Switcher */}
-          <div className="tab-switcher">
-            <button
-              className={`tab-btn ${activeTab === 'patient' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab('patient');
-                speakText(t.patientMode);
-              }}
-            >
-              <UserCheck size={18} />
-              {t.patientMode}
-            </button>
-
-            <button
-              className={`tab-btn ${activeTab === 'caregiver' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab('caregiver');
-                speakText(t.caregiverDashboard);
-              }}
-            >
-              <ShieldAlert size={18} />
-              {t.caregiverDashboard}
-            </button>
-          </div>
-
-          {/* Controls: Language, High Contrast, Offline Sync & Appwrite Auth & Google A2A */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-            {/* Google A2A Protocol Hub Button */}
-            <button
-              onClick={() => {
-                setIsA2AOpen(true);
-                speakText("Opening Google A2A Agent Protocol Hub");
-              }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '7px 14px',
-                borderRadius: '12px',
-                fontSize: '13px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                background: 'linear-gradient(135deg, #0077b6, #023e8a)',
-                color: '#ffffff',
-                border: 'none',
-                boxShadow: '0 2px 6px rgba(0, 119, 182, 0.25)'
-              }}
-              title="Google A2A (Agent-to-Agent) Protocol Hub"
-            >
-              <Network size={15} />
-              <span>Google A2A Hub</span>
-            </button>
-
-            {/* Appwrite Account Button */}
-            <button
-              onClick={() => setIsAuthOpen(true)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '7px 14px',
-                borderRadius: '12px',
-                fontSize: '13px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                background: 'linear-gradient(135deg, #1b4332, #2d6a4f)',
-                color: '#ffffff',
-                border: 'none',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
-              }}
-              title="Manage Appwrite Cloud Account"
-            >
-              <User size={15} />
-              <span>Appwrite Account</span>
-            </button>
-
-            {/* Offline Sync Status */}
-            <div
-              onClick={triggerCloudSync}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '6px 12px',
-                borderRadius: '20px',
-                fontSize: '13px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                background: syncStatus.isOnline ? 'rgba(56, 176, 0, 0.12)' : 'rgba(239, 68, 68, 0.12)',
-                color: syncStatus.isOnline ? '#2b9348' : '#dc2626',
-                border: `1px solid ${syncStatus.isOnline ? '#a7c957' : '#fca5a5'}`
-              }}
-              title="Click to manually force cloud sync"
-            >
-              {syncStatus.isOnline ? <Wifi size={15} /> : <WifiOff size={15} />}
-              <span>{syncStatus.isOnline ? t.onlineStatus : t.offlineStatus}</span>
-              {syncStatus.pendingCount > 0 && (
-                <RefreshCw size={13} className="spin" style={{ marginLeft: '4px' }} />
-              )}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span className="brand-title">{t.appTitle}</span>
+              <span className="brand-badge">COGNITIVE HEALTH</span>
             </div>
-
-            {/* Regional Language Picker */}
-            <select
-              value={language}
-              onChange={(e) => {
-                setLanguage(e.target.value);
-                speakText(LANGUAGES.find(l => l.code === e.target.value)?.name || '');
-              }}
-              style={{
-                padding: '8px 14px',
-                borderRadius: '12px',
-                border: '1px solid var(--card-border)',
-                background: 'white',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: 'var(--primary-emerald)',
-                cursor: 'pointer',
-                outline: 'none'
-              }}
-            >
-              {LANGUAGES.map((lang) => (
-                <option key={lang.code} value={lang.code}>
-                  {lang.name} ({lang.region})
-                </option>
-              ))}
-            </select>
-
-            {/* High Contrast Toggle */}
-            <button
-              className="btn-secondary"
-              onClick={() => {
-                const next = !highContrast;
-                setHighContrast(next);
-                if (next) {
-                  document.body.classList.add('high-contrast');
-                } else {
-                  document.body.classList.remove('high-contrast');
-                }
-                speakText(t.highContrast);
-              }}
-              style={{ padding: '8px 12px' }}
-              title="Toggle Accessible High Contrast Mode"
-            >
-              <Eye size={18} />
-            </button>
-
-            {/* Voice Assistant Toggle */}
-            <button
-              className="btn-secondary"
-              onClick={() => setVoiceEnabled(!voiceEnabled)}
-              style={{
-                padding: '8px 12px',
-                background: voiceEnabled ? 'rgba(45, 106, 79, 0.1)' : '#f1f5f9',
-                color: voiceEnabled ? 'var(--primary-emerald)' : 'var(--text-muted)'
-              }}
-              title="Toggle Voice Read-Aloud"
-            >
-              {voiceEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
-            </button>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', fontWeight: '600' }}>{t.tagline}</p>
           </div>
         </div>
-      </header>
 
-      {/* Appwrite Auth Modal */}
-      <AppwriteAuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+        {/* 5 Primary Navigation Tabs */}
+        <div className="tab-switcher" style={{ flexWrap: 'wrap' }}>
+          {/* 1. Games Tab */}
+          <button
+            className={`tab-btn ${activeTab === 'games' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveTab('games');
+              speakText("Games & Cognitive Exercises");
+            }}
+          >
+            <Gamepad2 size={19} />
+            <span>Games</span>
+          </button>
 
-      {/* Google A2A Agent Network Explorer Modal */}
-      {isA2AOpen && <A2AAgentNetworkExplorer onClose={() => setIsA2AOpen(false)} />}
-    </>
+          {/* 2. Patient Mode Tab */}
+          <button
+            className={`tab-btn ${activeTab === 'patient' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveTab('patient');
+              speakText(t.patientMode);
+            }}
+          >
+            <UserCheck size={19} />
+            <span>{t.patientMode}</span>
+          </button>
+
+          {/* 3. Caregiver Portal Tab */}
+          <button
+            className={`tab-btn ${activeTab === 'caregiver' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveTab('caregiver');
+              speakText(t.caregiverDashboard);
+            }}
+          >
+            <ShieldAlert size={19} />
+            <span>Caregiver & Doctor</span>
+          </button>
+
+          {/* 4. Dedicated AI Hub Tab */}
+          <button
+            className={`tab-btn ${activeTab === 'ai-hub' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveTab('ai-hub');
+              speakText("AI Innovations Hub");
+            }}
+          >
+            <Bot size={19} />
+            <span>AI Hub</span>
+          </button>
+
+          {/* 5. Settings Tab */}
+          <button
+            className={`tab-btn ${activeTab === 'settings' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveTab('settings');
+              speakText("System & Accessibility Settings");
+            }}
+          >
+            <Settings size={19} />
+            <span>Settings</span>
+          </button>
+        </div>
+
+        {/* Quick Utility Controls: Sync Status & High Contrast */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          {/* Offline Sync Status */}
+          <div
+            onClick={triggerCloudSync}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 12px',
+              borderRadius: '20px',
+              fontSize: '13px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              background: syncStatus.isOnline ? '#f0fdf4' : '#fef2f2',
+              color: syncStatus.isOnline ? '#15803d' : '#b91c1c',
+              border: `1px solid ${syncStatus.isOnline ? '#bbf7d0' : '#fecaca'}`
+            }}
+            title="Click to force cloud sync"
+          >
+            {syncStatus.isOnline ? <Wifi size={15} /> : <WifiOff size={15} />}
+            <span>{syncStatus.isOnline ? t.onlineStatus : t.offlineStatus}</span>
+            {syncStatus.pendingCount > 0 && (
+              <RefreshCw size={13} className="spin" style={{ marginLeft: '4px' }} />
+            )}
+          </div>
+
+          {/* High Contrast Quick Toggle */}
+          <button
+            className="btn-secondary"
+            onClick={() => {
+              const next = !highContrast;
+              setHighContrast(next);
+              if (next) {
+                document.body.classList.add('high-contrast');
+              } else {
+                document.body.classList.remove('high-contrast');
+              }
+              speakText(t.highContrast);
+            }}
+            style={{ padding: '6px 12px', minHeight: '38px', borderRadius: '10px' }}
+            title="Toggle Accessible High Contrast Mode"
+          >
+            <Eye size={16} />
+          </button>
+        </div>
+      </div>
+    </header>
   );
 };
